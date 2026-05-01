@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import pickle
 import os
+import requests
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 from sklearn.ensemble import RandomForestClassifier
@@ -155,15 +156,31 @@ for i, col in enumerate(numeric_cols):
     else:
         user_data[col] = col3.number_input(f"{col.upper()}", value=float(df[col].mean()), help=help_text)
 
+
 if st.button("🌿 Suggest Best Crop"):
-    input_data = np.array([list(user_data.values())]).reshape(1, -1)
-    input_scaled = scaler.transform(input_data)
-    prediction = model.predict(input_scaled)[0]
+    # Prepare data in API format
+    api_data = {
+        "N": user_data["n"],
+        "P": user_data["p"],
+        "K": user_data["k"],
+        "temperature": user_data["temperature"],
+        "humidity": user_data["humidity"],
+        "ph": user_data["ph"],
+        "rainfall": user_data["rainfall"]
+    }
 
-    # Decode label if label encoder exists
-    if label_encoder:
-        crop_name = label_encoder.inverse_transform([prediction])[0]
-    else:
-        crop_name = str(prediction)
+    try:
+        response = requests.post(
+            "http://127.0.0.1:8000/predict",
+            json=api_data
+        )
 
-    st.success(f"🌾 Based on the given soil data, the recommended crop is: **{crop_name.upper()}**")
+        result = response.json()
+        crop_name = result["recommended_crop"]
+
+        st.success(f"🌾 Recommended crop: **{crop_name.upper()}**")
+
+    except Exception as e:
+        st.error(f"❌ API Error: {e}")
+
+   
