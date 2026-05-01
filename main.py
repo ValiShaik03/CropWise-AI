@@ -5,7 +5,7 @@ import numpy as np
 
 app = FastAPI()
 
-# Load models
+# Loading models
 model = pickle.load(open("models/soil_model.pkl", "rb"))
 scaler = pickle.load(open("models/scaler.pkl", "rb"))
 label_encoder = pickle.load(open("models/label_encoder.pkl", "rb"))
