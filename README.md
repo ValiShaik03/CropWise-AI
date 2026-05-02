@@ -1,157 +1,139 @@
-# 🌱 Smart Crop Recommendation System
+# 🌱 CropWise-AI — Intelligent Crop Recommendation System
 
-An **AI-powered web application** built with **Python, Streamlit, and Scikit-learn** that helps farmers and agricultural analysts classify soil types and recommend the most suitable crops based on nutrient levels and environmental factors.
+An **AI-powered full-stack application** that recommends the most suitable crops based on soil and environmental conditions.  
+Built using **Machine Learning + FastAPI + Streamlit**, and deployed as a **cloud-based system**.
 
 ---
 
 ## 🧠 Project Overview
 
-This project uses a **Machine Learning model** trained on soil data (NPK, pH, temperature, humidity, and rainfall) to:
-- Classify soil conditions.
-- Suggest the **best crop** for given soil parameters.
-- Provide insights into each soil factor for better decision-making.
+CropWise-AI helps farmers and agricultural analysts make **data-driven decisions** by analyzing:
 
-Farmers can use this app to make **data-driven crop choices** and **increase yield efficiency**.
+- Soil nutrients (N, P, K)
+- pH level
+- Temperature & humidity
+- Rainfall conditions  
+
+👉 The system uses a trained ML model exposed via an API to provide **real-time crop recommendations**.
 
 ---
 
-## 🚀 Features
+## 🚀 Key Features
 
-✅ Interactive **Streamlit web app**  
-✅ Accepts **default Kaggle dataset** or **custom CSV uploads**  
-✅ Displays **dataset preview & auto-trains model**  
-✅ Allows **manual input of soil parameters**  
-✅ Provides **tooltips (❓)** explaining each parameter & ideal ranges  
-✅ Suggests **optimal crop name** using a trained Random Forest model  
-✅ **Educates users** with parameter meanings and importance  
+- ✅ AI-based crop prediction using **Random Forest**
+- ✅ **FastAPI backend** for real-time inference
+- ✅ **Streamlit frontend** for interactive UI
+- ✅ Structured JSON input using **Pydantic validation**
+- ✅ Fully deployed on cloud (Render + Streamlit Cloud)
+- ✅ Clean **client-server architecture**
+- ✅ Fast and scalable prediction system
+
+---
+
+## 🏗️ System Architecture
+```
+User (Browser)
+↓
+Streamlit (Frontend UI)
+↓
+FastAPI (Backend API)
+↓
+ML Model (Random Forest)
+↓
+Prediction (Recommended Crop)
+```
 
 ---
 
 ## 🧩 Tech Stack
 
-| Category | Technologies |
-|-----------|---------------|
-| **Language** | Python |
-| **Framework** | Streamlit |
-| **Machine Learning** | Scikit-learn |
-| **Data Handling** | Pandas, NumPy |
-| **Visualization** | Matplotlib (optional) |
-| **Model Used** | RandomForestClassifier |
-| **Dataset** | [Kaggle Crop Recommendation Dataset](https://www.kaggle.com/datasets/atharvaingle/crop-recommendation-dataset) |
+| Category        | Technologies                         |
+|----------------|-------------------------------------|
+| **Language**   | Python                              |
+| **Frontend**  | Streamlit                           |
+| **Backend**   | FastAPI                             |
+| **ML Model**  | RandomForestClassifier              |
+| **Validation**| Pydantic                            |
+| **Deployment**| Render, Streamlit Cloud             |
+| **Libraries** | Pandas, NumPy, Scikit-learn         |
 
 ---
 
 ## 📂 Project Structure
 ```
-soil_crop_app/
+cropwise-ai/
 │
-├── app.py # Main Streamlit application
-├── utils.py # Helper functions (model loading, etc.)
-│
-├── data/
-│ └── Crop_recommendation.csv # Default Kaggle dataset
+├── app.py # Streamlit frontend (UI)
+├── main.py # FastAPI backend (API)
 │
 ├── models/
-│ ├── soil_model.pkl # Trained ML model
-│ ├── scaler.pkl # Feature scaler
-│ └── label_encoder.pkl # Label encoder for crops
+│ ├── soil_model.pkl
+│ ├── scaler.pkl
+│ └── label_encoder.pkl
 │
-├── requirements.txt # Python dependencies
-└── README.md # Project documentation
+├── data/
+│ └── Crop_recommendation.csv
+│
+├── requirements.txt
+└── README.md
 ```
 
 ---
 
-## ⚙️ Installation & Setup
+## ⚙️ How It Works
 
-### 1️⃣ Clone the Repository
-```bash
-git clone https://github.com/<your-username>/soil-crop-suggestion.git
-cd soil-crop-suggestion
+1. User enters soil parameters in Streamlit UI  
+2. Streamlit sends request → FastAPI API  
+3. FastAPI processes data using trained ML model  
+4. API returns predicted crop  
+5. Result is displayed instantly on UI  
+
+---
+
+## 🌐 Live Demo
+
+- 🔗 **Frontend (Streamlit):** https://cropwiseai.streamlit.app/
+- 🔗 **API Docs:**  https://cropwiseai-api.onrender.com/docs
+
+---
+
+## 🧪 Example Input
+
+```json
+{
+"N": 90,
+"P": 42,
+"K": 43,
+"temperature": 20.8,
+"humidity": 82,
+"ph": 6.5,
+"rainfall": 202
+}
 ```
 
-2️⃣ Create a Virtual Environment (optional)
-```bash
-python -m venv venv
-venv\Scripts\activate   # For Windows
-```
-3️⃣ Install Dependencies
-```bash
-pip install -r requirements.txt
-```
-4️⃣ Run the Application
-```bash
-streamlit run app.py
-```
+## 🧮 Model Performance
+- Accuracy: ~90%
+- Algorithm: Random Forest
+- Optimized using feature scaling and encoding
 
-🌾 How It Works
+## 🧑‍🌾 Future Enhancements
+- 🌍 Location-based recommendations (GPS integration)
+- 🌐 Multi-language support
+- 📊 Confidence score & top-3 crop suggestions
+- 📱 Mobile app integration
+- 🗄️ Database logging for predictions
 
-1. Choose Default Dataset or Upload Your Own
+## 🤝 Contributing
+- Fork the repository
+- Create a new branch
+- Make your changes
+- Submit a pull request
 
-2. App automatically:
+## 🏆 Credits 
+- Author: [Vali Shaik](https://www.linkedin.com/in/mahaboobvalishaik/) 
+- Dataset: Crop Recommendation Dataset on Kaggle 
+- Frameworks: Streamlit, Scikit-learn, Pandas, NumPy
 
-   - Cleans data
+⭐ Support
 
-   - Trains a RandomForest model
-
-   - Displays dataset preview
-
-3. Enter soil parameters (Nitrogen, Phosphorus, etc.)
-
-4. Hover over ❓ icons to understand each parameter and its ideal range
-
-5. Click "🌿 Suggest Best Crop" to get your crop recommendation
-
-💡 Example Parameters
-```
-| Parameter        | Example Value | Ideal Range | Description               |
-| ---------------- | ------------- | ----------- | ------------------------- |
-| Nitrogen (N)     | 60            | 0–140       | Promotes leaf growth      |
-| Phosphorus (P)   | 50            | 5–145       | Root & flower growth      |
-| Potassium (K)    | 40            | 5–205       | Strengthens stems         |
-| pH               | 6.8           | 5.5–7.5     | Neutral soil              |
-| Temperature (°C) | 25            | 15–35       | Suitable for most crops   |
-| Humidity (%)     | 70            | 40–90       | Helps nutrient absorption |
-| Rainfall (mm)    | 120           | 20–300      | Sufficient for most crops |
-```
-🧮 Model Performance
-
-- Metric	Value
-- Accuracy	~90%
-- F1-Score Improvement (after tuning)	+8%
-- Yield Prediction Improvement	+12% compared to traditional methods
-
-🧑‍🌾 Future Enhancements
-
-- Add “Farmer Mode” with simplified options like Rich Soil, Dry Soil, Moderate Soil.
-
-- Integrate GPS-based soil data for location-aware suggestions.
-
-- Add multi-language support (Hindi, Telugu, Tamil, etc.).
-
-- Deploy app on Streamlit Cloud or Hugging Face Spaces for public use.
-
-🤝 Contributing
-
-- Fork the repo 🍴
-
-- Create your feature branch (git checkout -b feature-name)
-
-- Commit your changes (git commit -m 'Added feature X')
-
-- Push to the branch (git push origin feature-name)
-
-- Open a Pull Request 🚀
-
-🏆 Credits
-
-Author: [Vali Shaik](https://www.linkedin.com/in/mahaboobvalishaik/)
-
-Dataset: Crop Recommendation Dataset on Kaggle
-
-Frameworks: Streamlit, Scikit-learn, Pandas, NumPy  
-
-📸 Preview
-![Smart_Crop_Recommendation_Preview](https://github.com/ValiShaik03/smart_crop_recommendation_system/blob/51ca2aa7419afbb6b2a9985a94d4401cb5f876ec/preview/preview1.png)
-
-⭐ If you like this project, consider giving it a star on GitHub! ⭐
+If you found this project useful, please ⭐ star the repository!
