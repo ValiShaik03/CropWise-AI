@@ -134,6 +134,6 @@ cropwise-ai/
 - Dataset: Crop Recommendation Dataset on Kaggle 
 - Frameworks: Streamlit, Scikit-learn, Pandas, NumPy
 
-⭐ Support
+## ⭐ Support
 
 If you found this project useful, please ⭐ star the repository!
