@@ -171,7 +171,7 @@ if st.button("🌿 Suggest Best Crop"):
 
     try:
         response = requests.post(
-            "http://127.0.0.1:8000/predict",
+            "https://cropwiseai-api.onrender.com/predict",
             json=api_data
         )
 
@@ -182,5 +182,3 @@ if st.button("🌿 Suggest Best Crop"):
 
     except Exception as e:
         st.error(f"❌ API Error: {e}")
-
-   
